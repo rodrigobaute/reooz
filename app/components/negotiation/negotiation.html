@@ -1,0 +1,78 @@
+<ion-view class="overlay" hide-nav-bar="false">
+    <ion-header-bar ng-class="headerClass">
+        <div class="text-center" style="width:100%;">
+            <h1 class="text-center text-white nm np" style="width:100%">
+                <i class="ion-ios-infinite f30"></i>
+                Negociação
+            </h1>
+        </div>
+    </ion-header-bar>
+    
+
+    <ion-content >
+        <ion-scroll direction="y"  style="padding-bottom:60px;">
+            <div class="btn-reooz-color text-white nm np m10 mtb">
+                <p class="ptb">Selecione 1 ou mais produtos que deseja utilizar na negociação!</p>
+            </div>
+            <div class="text-left ptb10 prl10">
+                <img src="{{negotiationVm.owner.user.picture.url!=null?negotiationVm.owner.user.picture.url:negotiationVm.imgPerfil}}" class="img-avatar-produto"> 
+                <span ng-if="negotiationVm.owner.user.personId !=negotiationVm.personId">Itens de <strong>{{negotiationVm.owner.user.userName}}</strong></span>
+                <span ng-if="negotiationVm.owner.user.personId ==negotiationVm.personId">Meus itens</span>
+                <button class="button button-small btn-reooz-color prl10" ng-click="negotiationVm.addOwnerCash()" style="position:absolute;right:5px;">
+                    {{negotiationVm.owner.hasCash}}
+                    <span ng-if="!negotiationVm.owner.hasCash">Solicitar $</span>
+                </button>
+            </div>
+            <ion-scroll direction="x">
+                <div class="row">
+                    <div ng-repeat="item in negotiationVm.owner.products" class="col col-40" >
+                        <div class="center-cropped np nm br10" style="background-image: url('{{item.pictures[0].picture.url || negotiationVm.imgPadrao
+                    }}');" ng-click="negotiationVm.addOwner(item)" ng-class="{'item-selected':item.selected}">
+                            <div class="icon-circle-bg">
+                                <span></span>
+                                <img src="img/icons/close.png" class="img-responsive" style="opacity:0;">
+                                <i class="on-hover ion-checkmark"></i>
+         
+                </div></div></div></div>
+            </ion-scroll>            
+            <div class="text-center bg-negotiation">
+                <img src="img/reooz-white.png" style="width:15%;height:auto;" />
+            </div>
+            
+            <div class="text-left ptb10 prl10">
+                <img src="{{negotiationVm.proposer.user.picture.url!=null?negotiationVm.proposer.user.picture.url:negotiationVm.imgPerfil}}" class="img-avatar-produto">  
+                <span ng-if="negotiationVm.proposer.user.personId !=negotiationVm.personId"> Itens de <strong>{{negotiationVm.proposer.user.userName}}</strong></span>
+                    <span ng-if="negotiationVm.proposer.user.personId ==negotiationVm.personId"> Meus itens</span>
+                <button class="button button-small btn-reooz-color prl10" ng-click="negotiationVm.addProposerCash()" style="position:absolute;right:5px;">
+                    {{negotiationVm.proposer.hasCash}}
+                    <span ng-if="!negotiationVm.proposer.hasCash">Oferecer $</span>
+                </button>
+
+</div>
+            <ion-scroll direction="x">
+                <div class="row">
+                    <div ng-repeat="item in negotiationVm.proposer.products" class="col col-40">
+                        <div class="center-cropped np nm br10" style="background-image: url('{{item.pictures[0].picture.url || negotiationVm.imgPadrao}}');" ng-click="negotiationVm.addProposer(item)" ng-class="{'item-selected':item.selected}">
+                            <div class="icon-circle-bg">
+                                <span></span>
+                                <img src="img/icons/close.png" class="img-responsive" style="opacity:0;">
+                                <i class="on-hover ion-checkmark" ></i>
+                                
+                            </div>
+                        </div>
+                        {{item.title}}
+                    </div>
+                   
+                </div>
+
+            </ion-scroll>
+            <div class="prl10">
+                <button class="button-full btn-reooz text-white nm" ng-click="negotiationVm.sendNegotiation()">
+                    Enviar Proposta
+                </button>
+            </div>
+            <div style="padding-bottom:60px"></div>
+        </ion-scroll>        
+    </ion-content> 
+           
+</ion-view>

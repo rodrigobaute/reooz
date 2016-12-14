@@ -1,0 +1,51 @@
+
+
+<ion-side-menus ng-controller="MenuCtrl as ctrl">        
+        <ion-side-menu-content >
+          <ion-nav-bar align-title="center">
+            <ion-nav-back-button class="button-icon">
+                <img src="img/icons/seta-esquerda.png" style="width:30px;height:auto;"/>
+            </ion-nav-back-button>
+              
+            
+          </ion-nav-bar>
+          <ion-nav-view name="main"></ion-nav-view>
+        </ion-side-menu-content> 
+      
+        <ion-side-menu side="right" class="menu-gradient">
+          <ion-header-bar class="">
+              <div class="text-center " style="background-color:transparent;padding:20px 0;">
+                  <img src="img/logo-header.png" class="img-responsive" width="30%;" />
+              </div>
+          </ion-header-bar>
+          <ion-content >
+            <ul class="list" style="top:60px;">
+              <li>
+                <a class="menu-item" menu-close nav-clear ng-click="ctrl.navGo('app.main.config')"><i class="ion-wrench pr10"></i> Preferencias</a>
+              </li>
+              <li>
+                <a class="menu-item" menu-close nav-clear ng-click="ctrl.navGo('app.main.profile')"><i class="ion-person pr10"></i> Meu Perfil</a>
+              </li>
+                <li>
+                    <a class="menu-item" menu-close nav-clear ng-click="ctrl.navGo('app.main.friends')"><i class="ion-ios-people pr10"></i> Reoozers</a>
+                </li>
+                <li>
+                    <a class="menu-item" menu-close nav-clear ng-click="ctrl.navGo('app.main.favourites')"><i class="ion-android-star pr10"></i> Na Mira</a>
+                </li>                              
+               <li>
+                <a class="menu-item" menu-close nav-clear ng-click="ctrl.showModal('app/components/about/about.html')"><i class="ion-ios-infinite pr10"></i> Sobre</a>
+              </li>               
+               <li>
+                <a class="menu-item" menu-close nav-clear ng-click="ctrl.showModal('app/components/terms/terms.html')"><i class="ion-ios-information pr10"></i> Termos de uso</a>
+              </li>
+              <li>
+                <a class="menu-item logout" menu-close ng-click="ctrl.logout()"><i class="ion-log-out pr10"></i> Sair</a>
+              </li>
+              
+            </ul>
+          </ion-content>
+        </ion-side-menu>
+        
+      </ion-side-menus>
+
+     

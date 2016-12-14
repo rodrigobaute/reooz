@@ -1,0 +1,20 @@
+<ion-modal-view ng-controller="ProductController as productVm">
+<div class="modal image-modal overlay text-center" >
+    <ion-header-bar  ng-class="headerClass">             
+        <button class=" button button-icon button-clear  pull-right"  ng-click="productVm.modal.hideModal()">
+            <span class="ion-close-circled close text-white"></span>
+        </button>        
+    </ion-header-bar >
+    <ion-content class="padding">
+      <h1 class="">DENUNCIAR</h1>
+        <label class="item item-input item-select">
+            <div class="input-label">
+                Motivo
+            </div>
+            <select ng-model="productVm.denuncia.motivo" ng-options="item.id as item.text  for item in productVm.complaintType"></select>
+        </label>
+        
+        <button class="button-block btn-reooz" ng-click="productVm.denunciaSubmit()">Enviar Denúncia</button>
+    </ion-content>
+</div>
+</ion-modal-view>

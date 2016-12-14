@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html ng-app="reooz">
+  <head>
+   <meta charset="utf-8">       
+    <meta name="default-src" content="*">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="img-src * data:  file://*; default-src http://* https://* gap://ready file://* *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline' 'unsafe-eval'; media-src *">
+    
+    
+    <meta property="og:site_name" content="{{ngMeta['og:site_name']}}">
+    <meta property="og:title" content="{{ngMeta['og:title']}}" />
+    <meta property="og:description" content="{{ngMeta['og:description']}}" />
+    <meta property="og:image" itemprop="image" content="{{ngMeta['og:image']}}">
+    <meta property="og:type" content="website" />
+    
+    
+    <title>Reooz</title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    
+    <link href="css/css.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    
+
+    <!--ng-cordova-->
+    <script src="js/ng-cordova.min.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+
+
+    <!-- PouchDB -->
+    <script src="js/pouchdb-5.4.5.min.js"></script>   
+    <script src="js/angular-pouchdb.js"></script>
+
+    <!--Masks -->
+    <script src="js/angular-input-masks-standalone.js"></script>
+    <!--Locale-->
+    <script src="js/angular-locale_pt-br.js"></script>
+	<!--Meta tags-->
+    <script src="js/ngMeta.js"></script>
+    
+
+    <!--Select2-->
+    <script src="js/ion-select-autocomplete.js"></script>
+
+    <!--Firebase-->
+    <script src="js/firebase.js"></script>
+    <script src="js/angularfire.min.js"></script>   
+
+    
+
+      <!--Mention-->
+      <script src="js/mentio.js"></script>
+      <script src="js/mentio-templates.js"></script>
+
+    <!--Masonry-->
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/imagesloaded.pkgd.js"></script>
+    <script src="js/angular-masonry-directive.js"></script>
+    
+
+    <!--Form Validation-->       
+    <script src="lib/validation/angular-validation.js"></script>
+    <script src="lib/validation/angular-validation-rule.js"></script>
+
+    <!--Paypal-->
+    <script src="js/paypal-mobile-js-helper.js"></script>
+    
+    <!--img-crop-->
+    <script src="js/ng-img-crop.js"></script>
+    <!--Moment-->       
+    <script src="js/moment-with-locales.js"></script>   
+      
+    <!--Toast-->
+    <script src="js/ionic-toast.bundle.min.js"></script>  
+       
+    <!--Cache-src-->
+    <script src="js/ionic-cache-src.js"></script>
+    <script src="js/roundProgress.min.js"></script>
+      <script src="js/ngStorage.js"></script>
+    <!-- your app's js -->
+    <script src="js/app.js"></script>   
+    <script src="js/routes.js"></script> 
+    <script src="js/config.js"></script>  
+    <script src="js/reooze-services.js"></script>
+
+    <!--Shared-->
+    <script src="app/shared/persistentDataFactory.js"></script>
+    <script src="app/shared/tokenFactory.js"></script>
+    <script src="app/shared/cameraFactory.js"></script>
+    <script src="app/shared/menu/menu.controller.js"></script>
+
+    <!--Custom Controllers-->    
+    <script src="app/components/login/login.controller.js"></script>
+    <script src="app/components/feed/feed.controller.js"></script>
+      <script src="app/components/favourites/favourites.controller.js"></script>
+    <script src="app/components/feedFriends/feedFriends.controller.js"></script>
+    <script src="app/components/feedSelf/feedSelf.controller.js"></script>
+    <script src="app/components/profile/profile.controller.js"></script>
+    <script src="app/components/product/product.controller.js"></script>
+    <script src="app/components/friends/friends.controller.js"></script>
+    <script src="app/components/activity/activity.controller.js"></script>
+    <script src="app/components/reoozrProfile/reoozrProfile.controller.js"></script>
+    <script src="app/components/reoozrList/reoozrList.controller.js"></script>
+    <script src="app/components/negotiation/negotiation.controller.js"></script>
+    <script src="app/components/proposal/proposal.controller.js"></script>
+    <script src="app/components/configuration/configuration.controller.js"></script>
+  </head>
+  <body  class="platform-browser platform-cordova platform-webview"> 
+   <ion-nav-view></ion-nav-view>  
+    
+    <div id="“fb-root”"></div>  
+    
+  </body>
+</html>
+

@@ -1,0 +1,58 @@
+<ion-view class="overlay">
+    <ion-header-bar ng-class="headerClass">
+        <div class="text-center" style="width:100%;">
+            <h1 class="text-center text-white nm np" style="width:100%">
+                <i class="ion-ios-infinite f30"></i>
+                Atividade
+            </h1>
+        </div>
+    </ion-header-bar>
+    <div class=" tabs tabs-top tabs-virtual">
+        <a class="tab-item "
+           ng-class="{'active': activityVm.currentIndex=='0'}" ng-click="activityVm.slideTO(0)">
+            NOTIFICAÇÕES
+        </a>
+        <a class="tab-item "
+           ng-class="{'active': activityVm.currentIndex=='1'}" ng-click="activityVm.slideTO(1)">
+            NEGOCIAÇÕES
+        </a>      
+    </div>  
+    <ion-content class="" has-footer="true" style="padding-top:45px;">
+        <ion-refresher pulling-text="Puxe para atualizar"
+                       on-refresh="activityVm.loadItens()"></ion-refresher>
+            <ion-slides options="activityVm.options" slider="activityVm.sliderF" disable-scroll="false" class="full-height">
+                <ion-slide-page style="overflow-x:hidden;">
+                    <ion-list class="list" style="padding-bottom:60px;">
+                        <ion-item ng-repeat="item in activityVm.notifications" click-for-options class="item-text-wrap">
+                            <img src="{{item.userPicture.url || activityVm.imgPadrao}}" class="img-avatar" style="display:inline-block;">
+                            <div style="display:inline-block;width:85%;font-size:11px;">{{item.notificationText}}</div>
+                            <!--<ion-option-button class="button-assertive " ng-click="activityVm.addFriend(item)">
+                            <span class="ion-close-circled f30"></span>
+                        </ion-option-button>-->
+                        </ion-item>
+                    </ion-list>
+                </ion-slide-page>
+                <ion-slide-page style="overflow-x:hidden;">
+                    <ion-list class="list" style="padding-bottom:60px;" ng-controller="ProposalController as proposalVm">
+                        <ion-item ng-repeat="item in proposalVm.negotiations | orderBy:'negotiationId':true" click-for-options class="item-text-wrap">
+                            <img ng-src="{{item.proposerPerson==proposalVm.personId?item.ownerPerson.picture.url: item.proposerPerson.picture.url || proposalVm.imgPadrao}}" class="img-avatar" style="display:inline-block;">
+                            <div style="display:inline-block;width:85%;font-size:11px;">
+                                {{ proposalVm.statusDescription[item.status - 1]}}
+                                <span ng-if="item.status==1"> de <strong>{{item.proposerPerson.userName}}</strong></span>
+                                <span ng-if="item.status==2 || item.status==3 || item.status==6"> por <strong>{{item.proposerPerson.userName}}</strong></span>
+                                <span ng-if="item.status==5"> <strong>{{item.proposerPerson.userName}}</strong></span>
+                            </div>
+                            <ion-option-button class="color-buttons-green " ng-click="proposalVm.proposalDetails(item)">
+                                <div class="icon-text">
+                                    <i class="ion-ios-eye-outline"></i>
+                                    <small class="upper f8">Visualizar</small>
+                                </div>
+                            </ion-option-button>
+                        </ion-item>
+
+                    </ion-list>
+                </ion-slide-page>
+
+                <ion-infinite-scroll icon="ion-ios-reload" on-infinite="feedVm.loadItens()" ng-if="activityVm.moreDataCanBeLoaded" distance="1%" immediate-check="false"></ion-infinite-scroll>
+</ion-content>    
+</ion-view>

@@ -1,0 +1,45 @@
+<ion-view class="overlay">
+    <ion-content class="text-center videobg-content" >
+        <div class="text-center mb20 pt20">
+            <img src="img/logo-header.png" class="img-responsive" width="160px;" />
+        </div>
+        <div class="container-grid">
+        
+            <div class="padding aniShow" ng-show="LoginVm.showLogin">
+                <label class="form-control pb10">
+                    <input type="text" placeholder="E-mail" ng-model="LoginVm.user" validator="required">
+                </label>
+                <label class="form-control pb10">
+                    <input type="password" placeholder="Senha" ng-model="LoginVm.password" validator="required">
+                </label>
+    
+                <button class="button-block btn-reooz" ng-click="LoginVm.login(LoginVm.user,LoginVm.password)">Login</button>
+                <p class="text-center text-white">OU</p>
+                <button class="button-block btn-face prl20 mb20" ng-click="LoginVm.loginFacebook()"><i class="ion-social-facebook f30 mr10"></i> Login com Facebook</button>
+                <p>
+                    <a class="text-white" ng-click="LoginVm.passRecoverModal()">
+                        ESQUECI A SENHA!
+                    </a>
+                </p>
+                
+                
+            </div>
+        </div>
+        <div>            
+            <video autoplay muted loop class="bg-vid"  preload x-webkit-airplay="allow" playsinline webkit-playsinline>
+                <source src="img/bg-video.mp4" type="video/webm">
+                <source src="img/bg-video.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="footer-bar" style="position:fixed;bottom:0px;width:100%;">
+            <div class="col-xs-6 np">
+                <button class="button-full color-buttons-black nm ptb20" ng-click="LoginVm.showLogin=!LoginVm.showLogin">
+                    ENTRAR
+                </button>
+            </div>
+            <div class="col-xs-6 np" ng-click="LoginVm.cadastroModal()">
+                <button class="button-full color-buttons-black nm ptb20">CADASTRE-SE</button>
+            </div>
+        </div>
+    </ion-content>    
+</ion-view>

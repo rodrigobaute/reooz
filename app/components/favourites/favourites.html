@@ -1,0 +1,58 @@
+<ion-view class="overlay " hide-nav-bar="false">
+    <ion-header-bar ng-class="headerClass">
+        <div class="text-center" style="width:100%;">
+            <h1 class="text-center text-white nm np" style="width:100%">
+                <i class="ion-ios-infinite f30"></i>
+                Na Mira
+            </h1>
+        </div>
+    </ion-header-bar>
+    
+    <ion-content>
+        <ion-refresher pulling-text="Puxe para atualizar"
+                       on-refresh="favouritesVm.loadItens()"></ion-refresher>
+            <div class="padding" style="padding-bottom:60px;">
+                <div masonry='{ "transitionDuration" : "0.6s" , "itemSelector" : ".tile"}'>
+                    <!-- items -->
+                    <div masonry-tile ng-repeat="item in favouritesVm.itens" class="tile p mtb10 col-l-6" style="visibility:hidden;" ng-if="item.personId!=favouritesVm.personId">
+
+                        <div class="pr product">
+                            <p class="text-left pl">
+                                <a ui-sref="app.main.reoozrProfile({id:item.personId})">
+                                    <img ng-src="{{item.profilePicture.url||favouritesVm.imgPerfil}}" class="img-avatar-produto">
+                                    <strong>{{item.userName}}</strong>
+                                </a>
+                            </p>
+                            <a href="#/app/main/product/{{item.productId}}" ng-if="!item.advertisement">
+                                <img ng-src="{{item.pictures[0].picture.url || feedVm.imgPadrao}}" class="img-responsive-full br15">
+
+                                <p class="title-pil np nm pl">
+                                    {{item.title}}
+                                </p>
+                                <p class="text-pil np nm pl">
+                                    {{item.estimatedPrice | currency:'R$'}}
+                                </p>
+                            </a>
+                        </div>
+
+                        <div ng-if="item.advertisement" ng-click="favouritesVm.external('{{item.advertisement.link}}')">
+                            <div class="pr product">
+                                <div class="text-left pl sublinks" style="font-size:8px;">
+                                    Patrocinado
+                                </div>
+                                <img ng-src="{{item.advertisement.images[0].url || favouritesVm.imgPadrao}}" class="img-responsive-full br15">
+
+                                <p class="title-pil np nm pl">
+                                    {{item.advertisement.title}}
+                                </p>
+                                <p class="text-pil np nm pl">
+                                    {{item.advertisement.description}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ion-infinite-scroll icon="ion-ios-reload" on-infinite="feedVm.loadItens()" ng-if="feedVm.moreDataCanBeLoaded" distance="1%" immediate-check="false"></ion-infinite-scroll>
+</ion-content>
+</ion-view>

@@ -1,0 +1,121 @@
+<ion-modal-view ng-controller="FeedSelfController as feedSelfVm">
+    <div class="modal image-modal overlay text-center" >
+        <ion-header-bar class="">             
+            <button class="button button-icon button-clear  pull-right"  ng-click="feedSelfVm.modal.hideModal()">
+                <span class="ion-close-circled close color-titles-green" ></span>
+            </button>        
+        </ion-header-bar >
+        <ion-content class="padding" >        
+          <h1 class="">Cadastre um Item</h1>
+            <form name="form_produto" id="form_produto">
+                
+                <div class="row-grid pb10">
+                  <div class="col-xs-4" >
+                      <div class="dashed br10" >
+                          <img src="{{feedSelfVm.model.pictures[0].picture.url?feedSelfVm.model.pictures[0].picture.url:feedSelfVm.iconCam}}" class="img-responsive" on-hold="feedSelfVm.removeImg(0)" ng-click="feedSelfVm.imgChoose(0)">
+                      </div>
+                  </div>
+                    <div class="col-xs-4">
+                        <div class="dashed br10">
+                            <img src="{{feedSelfVm.model.pictures[1].picture.url?feedSelfVm.model.pictures[1].picture.url:feedSelfVm.iconCam}}" class="img-responsive" on-hold="feedSelfVm.removeImg(1)" ng-click="feedSelfVm.imgChoose(1)">
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="dashed br10">
+                            <img src="{{feedSelfVm.model.pictures[2].picture.url?feedSelfVm.model.pictures[2].picture.url:feedSelfVm.iconCam}}" class="img-responsive" on-hold="feedSelfVm.removeImg(2)" ng-click="feedSelfVm.imgChoose(2)">
+                        </div>
+                    </div>
+                </div>
+                <label class="form-control pb10">               
+                    <input type="text" placeholder="Titulo" ng-model="feedSelfVm.model.title" validator="required, minlength=3" valid-method="blur" name="Title">
+                </label> 
+                 <label class="form-control pb10">
+                    <input type="text" placeholder="Descricao" ng-model="feedSelfVm.model.description" validator="required" valid-method="blur" name="Description">
+                </label>
+                <div class="row-grid nm">
+                  <div class="col-xs-6  np">
+                    <label class="form-control pb10">
+                        <input type="text" placeholder="Valor Estimado" ng-model="feedSelfVm.model.estimatedPrice" validator="required" valid-method="blur" name="EstimatedPrice" ui-money-mask>
+                    </label> 
+                  </div>
+                   <div class="col-xs-6 pr">                
+                  </div> 
+                </div> 
+                <label class="form-control pb10">
+                    <ion-select-autocomplete multiselect="false"
+                                             output="feedSelfVm.model.StateId"
+                                             header="Estado"
+                                             label-key="text" value-key="id"
+                                             options="feedSelfVm.estados" selected="feedSelfVm.updateCidades(feedSelfVm.model.StateId)" ctrl="FeedSelfController">
+                    </ion-select-autocomplete>
+                    <!--<select ng-model="feedSelfVm.model.stateId" ng-options="estado.id as estado.text  for estado in feedSelfVm.estados" validator="required" ng-change="feedSelfVm.updateCidades(feedSelfVm.model.stateId);" ng-init="feedSelfVm.model.stateId">
+                        <option value="">Estado</option>
+                    </select>-->
+                </label>
+                <label class="form-control pb10">
+                    <ion-select-autocomplete multiselect="false"
+                                             output="feedSelfVm.model.cityId"
+                                             header="Cidade"
+                                             label-key="text" value-key="id"
+                                             options="feedSelfVm.cidades"  ctrl="FeedSelfController">
+                    </ion-select-autocomplete>
+                    <!--<select ng-model="feedSelfVm.model.cityId" ng-options="cidade.id as cidade.text  for cidade in feedSelfVm.cidades" validator="required" ng-init="feedSelfVm.model.cityId">
+                        <option value="">Cidade</option>
+                    </select>-->
+                </label>
+                <div class="row-grid grid nm">
+                    <div class="col-xs-4 ptb10">
+                        Venda<br />
+                        <label class="toggle toggle-calm">
+                            <input type="checkbox" ng-model="feedSelfVm.model.isForSell" ng-checked="feedSelfVm.model.isForSell">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="col-xs-4 ptb10">
+                        Troca<br />
+                        <label class="toggle toggle-calm">
+                            <input type="checkbox" ng-model="feedSelfVm.model.isForSellExchange" ng-checked="feedSelfVm.model.isForSellExchange">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="col-xs-4 ptb10">
+                        Aluga<br />
+                        <label class="toggle toggle-calm">
+                            <input type="checkbox" ng-model="feedSelfVm.model.isForRent" ng-checked="feedSelfVm.model.isForRent">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div> 
+                <label class="form-control pb10">
+                    <ion-select-autocomplete multiselect="false"
+                                             output="feedSelfVm.model.category.categoryId"
+                                             header="Categoria"
+                                             label-key="text" value-key="id"
+                                             options="feedSelfVm.cat" ctrl="FeedSelfController" selected="feedSelfVm.updateSub(feedSelfVm.model.category.categoryId)">
+                    </ion-select-autocomplete>
+              <!--<select ng-model="feedSelfVm.model.category.categoryId" ng-options="cat.id as cat.text  for cat in feedSelfVm.cat" validator="required" ng-change="feedSelfVm.updateSub(feedSelfVm.model.category.categoryId);" ng-init="feedSelfVm.model.category.categoryId">
+                <option value="">Categoria</option>
+              </select>-->
+            </label>
+            <label class="form-control pb10">
+                <ion-select-autocomplete multiselect="false"
+                                         output="feedSelfVm.model.category.subCategoryId"
+                                         header="Sub Categoria"
+                                         label-key="text" value-key="id"
+                                         options="feedSelfVm.subCat" ctrl="FeedSelfController" >
+                </ion-select-autocomplete>
+              <!--<select ng-model="feedSelfVm.model.category.subCategoryId" ng-options="subCat.id as subCat.text for subCat in feedSelfVm.subCat" ng-init="feedSelfVm.model.category.subCategoryId">
+                <option value="">Sub Categoria</option>
+              </select> -->      
+            </label> 
+            <button class="button-block btn-reooz" ng-click="feedSelfVm.cadastroSubmit(form_produto)" >Salvar</button> 
+            </form>
+        </ion-content>
+    </div>
+</ion-modal-view>

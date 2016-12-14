@@ -1,0 +1,17 @@
+<div class="modal image-modal overlay text-center" >
+    <ion-header-bar class=""> 
+        <button class=" button button-icon button-clear  pull-right"  ng-click="profileVm.closeModal()">
+            <span class="ion-close-circled close color-titles-green" ></span>
+        </button>        
+    </ion-header-bar >
+    <ion-content class="padding">
+        <h1 class="ptb10">Editar imagem</h1>
+        <div class="cropArea">
+            <img-crop  image="profileVm.tempPicture" result-image="profileVm.picture" change-on-fly="false" result-image-format="image/jpeg" ></img-crop>
+        </div>
+        <!--<div>
+             <canvas width="300" height="300" id="canvas" image-cropper image="profileVm.tempPicture" cropped-image="profileVm.cropper.croppedImage" crop-width="200" crop-height="200" keep-aspect="true" touch-radius="50"></canvas>
+        </div>-->
+        <button class="button-block btn-reooz" ng-click="profileVm.setImage(profileVm.picture)">Salvar</button>        
+    </ion-content>
+</div>

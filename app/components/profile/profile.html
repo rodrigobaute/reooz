@@ -1,0 +1,63 @@
+<ion-view class="overlay">
+    <ion-header-bar ng-class="headerClass">
+        <div class="text-center" style="width:100%;">
+            <h1 class="text-center text-white nm np" style="width:100%">
+                <i class="ion-ios-infinite f30"></i>
+                Meu Perfil
+            </h1>
+        </div>
+    </ion-header-bar>
+    <ion-content class="padding text-center" has-footer="true" style="padding-bottom:60px;"> 
+        <h1 class="ptb10 text-center">{{profileVm.model.userName}}</h1>
+        <img id="profilePic" src="{{ profileVm.model.picture.url? profileVm.model.picture.url:'img/icons/icone-meuperfil.png'}}" class="img-avatar-produto" style="width:160px;height:auto;" on-hold="profileVm.removeImg(0)" ng-click="profileVm.imgChoose(0)">        
+        <div class="list  text-left pt10">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Nome</span>
+                <input type="text" ng-model="profileVm.model.firstName">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Sobrenome</span>
+                <input type="text" ng-model="profileVm.model.lastName">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">E-mail</span>
+                <input type="text" ng-model="profileVm.model.email" disabled>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Telefone</span>
+                <input type="text" ng-model="profileVm.model.phoneNumber" ui-br-phone-number>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Bio/link</span>
+                <input type="text" ng-model="profileVm.model.bioLink">
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Estado
+                </div>
+                <ion-select-autocomplete multiselect="false"
+                                         output="profileVm.model.stateId"
+                                         header="Estado"
+                                         label-key="text" value-key="id"
+                                         options="profileVm.estados" ctrl="ProfileController" selected="profileVm.updateCidades(profileVm.model.stateId)">
+                </ion-select-autocomplete>
+                <!--<select ng-model="profileVm.model.stateId" ng-options="estado.id as estado.text  for estado in profileVm.estados" ng-change="profileVm.updateCidades(profileVm.model.stateId);" ng-init="profileVm.model.stateId">                    
+                </select>-->
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Cidade
+                </div>
+                <ion-select-autocomplete multiselect="false"
+                                         output="profileVm.model.cityId"
+                                         header="Cidades"
+                                         label-key="text" value-key="id"
+                                         options="profileVm.cidades" ctrl="ProfileController" >
+                </ion-select-autocomplete>
+                <select ng-model="profileVm.model.cityId" ng-options="cidade.id as cidade.text  for cidade in profileVm.cidades" ng-init="0" ng-disabled="!profileVm.cidades"></select>
+            </label>
+            <button class="button-block btn-reooz" ng-click="profileVm.cadastroSubmit()">Salvar</button> 
+        </div>
+        <div style="padding-bottom:60px;"></div>
+    </ion-content>    
+</ion-view>

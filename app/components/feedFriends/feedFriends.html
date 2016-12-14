@@ -1,0 +1,87 @@
+﻿<ion-view class="overlay" hide-nav-bar="false" >
+    <ion-header-bar ng-class="headerClass">
+        <div class="text-center" style="width:100%;">
+            <h1 class="text-center text-white nm np" style="width:100%">
+                <i class="ion-ios-infinite f30"></i>
+                Meus Feed
+            </h1>
+        </div>
+    </ion-header-bar>
+    <!--<div class="tabs tabs-top tabs-virtual header-busca">
+        <label class="item-input-wrapper">
+            <input type="text" placeholder="Busca" ng-model="feedFriendsVm.titleSeach" class=" ptb prl10" ng-focus="feedFriendsVm.showSearch=true" ng-blur="feedFriendsVm.showSearch=false">
+        </label>
+        <a class="tab-item " ng-click="feedFriendsVm.busca()" ng-show="feedFriendsVm.showSearch">
+            <i class="ion-ios-search f30"></i>
+        </a>
+        <a class="tab-item bl" ng-click="feedFriendsVm.hideSearch()" ng-show="feedFriendsVm.showSearch">
+            <i class="ion-ios-close-empty f30"></i>
+        </a>
+    </div> -->
+    <ion-content>
+        <ion-refresher pulling-text="Puxe para atualizar"
+                       on-refresh="feedFriendsVm.loadItens()"></ion-refresher>
+            <div style="padding-bottom:60px;">
+                <div class="p10" ng-if="feedFriendsVm.noFeed">
+                    <div class="filtros " ng-class="headerClass">
+                        Você ainda não possui nenhum amigo, adcione outros reoozers como amigos e fique de olho em seus itens.
+                        <button type="button" class="btn-reooz text-white " ui-sref="app.main.friends" ng-class="headerClass">Encontrar amigos</button>
+                    </div>
+                </div>
+                <div masonry='{ "transitionDuration" : "0.6s" , "itemSelector" : ".tile"}' style="visibility:hidden;">
+                    <!-- items -->
+                    <div masonry-tile ng-repeat="item in feedFriendsVm.itens" class="tile mb20 mt10 col-l-12">
+
+                        <div class="">
+                            <div class="row-grid nm">
+                                <div class="col-xs-6">
+                                    <a ui-sref="app.main.reoozrProfile({id:item.personId})">
+                                        <p class="text-left prl10 upper">
+                                            <img ng-src="{{item.profilePicture.url || feedFriendsVm.imgPerfil}}" class="img-avatar-produto" style="width:40px;height:40px;margin-right:10px;">
+                                            <strong>{{item.userName}}</strong>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div class="col-xs-6 text-right">
+
+                                </div>
+                            </div>
+                            <a href="#/app/main/product/{{item.productId}}" ng-if="!item.advertisement">
+                                <div class="text-left prl20 pb10">
+                                    <span class="br10    " ng-if="item.isForSell">VENDE</span>
+                                    <span ng-if="item.isForSell && item.isForSellExchange"> / </span>
+                                    <span class="br10    " ng-if="item.isForSellExchange">TROCA</span>
+                                    <span ng-if="item.isForRent && item.isForSellExchange"> / </span>
+                                    <span class="br10   " ng-if="item.isForRent">ALUGA</span>
+                                </div>
+                                <img ng-src="{{item.pictures[0].picture.url || feedFriendsVm.imgPadrao}}" class="img-responsive-full ">
+
+                                <p class="title-pil nptb nmtb  prl20">
+                                    {{item.title}}
+                                </p>
+                                <p class="text-pil nptb nmtb prl20">
+                                    {{item.estimatedPrice | currency:'R$'}}
+                                </p>
+                            </a>
+                        </div>
+
+                        <div ng-if="item.advertisement" ng-click="feedVm.external('{{item.advertisement.link}}')">
+                            <div class="pr product">
+                                <div class="text-left pl sublinks" style="font-size:8px;">
+                                    Patrocinado
+                                </div>
+                                <img ng-src="{{item.advertisement.images[0].url || feedVm.imgPadrao}}" class="img-responsive-full br15">
+                                <p class="title-pil nptb nmtb  prl10">
+                                    {{item.advertisement.title}}
+                                </p>
+                                <p class="text-pil nptb nmtb  prl10">
+                                    {{item.advertisement.description}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ion-infinite-scroll icon="ion-ios-reload" on-infinite="feedFriendsVm.loadItens()" ng-if="feedFriendsVm.moreDataCanBeLoaded" distance="1%" immediate-check="false"></ion-infinite-scroll>
+</ion-content>
+</ion-view>s

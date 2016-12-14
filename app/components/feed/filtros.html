@@ -1,0 +1,50 @@
+﻿<div class="modal image-modal overlay text-center">
+    <ion-header-bar class=""> 
+        <button class=" button button-icon button-clear  pull-right"  ng-click="feedVm.closeModal()">
+            <span class="ion-close-circled close color-titles-green" ></span>
+        </button>        
+    </ion-header-bar >
+    <ion-content class="padding">
+        <h4>Filtros</h4>
+        <ul class="list">
+            <li class="item">
+                <label class="form-control pb10">
+                    <input type="text" placeholder="Título" ng-model="feedVm.titleSeach">
+                </label>
+            </li>
+            <li class="item">
+                <label class="form-control pb10">
+                    <select ng-model="feedVm.category" ng-options="cat.id as cat.text  for cat in feedVm.cat" ng-change="feedVm.updateSub(feedVm.category);">
+                        <option value="">Categoria</option>
+                    </select>
+                </label>
+            </li>
+            <li class="item">
+                <label class="form-control pb10">
+                    <select ng-model="feedVm.subCategory" ng-options="subCat.id as subCat.text for subCat in feedVm.subCat" ng-init="feedVm.sub">
+                        <option value="">Sub Categoria</option>
+                    </select>
+                </label>
+            </li>
+            <li class="item item-toggle text-left">
+                Somente de amigos
+                <label class="toggle toggle-balance">
+                    <input type="checkbox" ng-model="feedVm.searchFriends">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </li>
+            <li class="item item-toggle text-left">
+                Somente favoritos
+                <label class="toggle toggle-balance">
+                    <input type="checkbox" >
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </li>
+        </ul>
+        <button class="button-block btn-reooz" ng-click="feedVm.loadItens()">Filtrar</button>        
+    </ion-content>
+</div>

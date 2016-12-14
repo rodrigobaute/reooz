@@ -1,0 +1,20 @@
+<ion-view class="overlay" hide-nav-bar="false">    
+    <ion-header-bar ng-class="headerClass">
+        <div class="text-center" style="width:100%;">
+            <h1 class="text-center text-white nm np" style="width:100%">
+                <i class="ion-ios-infinite f30"></i>
+                Reoozers
+            </h1>
+        </div>
+    </ion-header-bar>
+    <ion-content style="padding-bottom:60px;" >
+        <ion-list class="list">
+            <ion-item ng-repeat="item in reoozrListVm.friends" ui-sref="app.main.reoozrProfile({id:item.personId})">
+                <img src="{{item.friendImage.url!=null?item.friendImage.url:reoozrListVm.imgPadrao}}" class="img-avatar">
+                {{item.userName}}               
+            </ion-item>
+            <h2 ng-if="reoozrListVm.semAmigos" class="p15">{{reoozrListVm.semAmigos}}</h2>
+        </ion-list>
+        
+    </ion-content>
+</ion-view>

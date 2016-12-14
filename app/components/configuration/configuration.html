@@ -1,0 +1,52 @@
+﻿<ion-view class="overlay">
+    <ion-header-bar ng-class="headerClass">
+        <div class="text-center" style="width:100%;">
+            <h1 class="text-center text-white nm np" style="width:100%">
+                <i class="ion-ios-infinite f30"></i>
+                Preferencias
+            </h1>
+        </div>
+    </ion-header-bar>
+	  
+    <ion-content class="padding text-center" has-footer="true"> 
+        <h1 class="ptb10 text-center" ng-if="configVm.model.userName">{{configVm.model.userName}}</h1>
+        <div class="row-grid" ng-repeat="input in configVm.model.preferences">
+            
+            <div class=" pr" ng-class="configVm.subList[$index].length >0 || input.subCategoryId ?'col-xs-5':'col-xs-10'">
+                <label class="form-control pb10">
+                    <ion-select-autocomplete multiselect="false"
+                                             output="input.categoryId"
+                                             header="{{configVm.catName[$index] || 'Categoria'}}"
+                                             label-key="text" value-key="id"
+                                             options="configVm.categorias" ctrl="ConfigurationController" selected="configVm.updateSub(input.categoryId,$index)">
+                    </ion-select-autocomplete>
+                    <!--<select ng-model="input.categoryId" ng-options="cat.id as cat.text  for cat in LoginVm.categorias"  ng-change="LoginVm.updateSub(input.categoryId,$index);">
+                    <option value="">Categoria</option>
+                </select>-->
+                </label>
+            </div>
+            <div class="col-xs-5" ng-show="configVm.subList[$index].length >0 || input.subCategoryId">               
+                <label class="form-control pb10">
+                    <ion-select-autocomplete multiselect="false"
+                                             output="input.subCategoryId"
+                                             header="{{configVm.subName[$index] ||'Sub Categoria'}}"
+                                             label-key="text" value-key="id"
+                                             options="configVm.subList[$index]" ctrl="ConfigurationController">
+                    </ion-select-autocomplete>
+                    <!--<select ng-model="input.subCategoryId" ng-options="sub.id as sub.text for sub in LoginVm.subList[$index]">
+                    <option value="">Sub Categoria</option>
+                </select>-->
+                </label>
+            </div>
+            <div class="col-xs-2">
+                <button class="button button-small button-balanced" ng-if="$index == configVm.model.preferences.length - 1" ng-click="configVm.addInput()">
+                    <i class="icon ion-plus"></i>
+                </button>
+                <button class="button button-small button-assertive" ng-if="$index != configVm.model.preferences.length - 1" ng-click="configVm.removeInput($index)">
+                    <i class="icon ion-minus"></i>
+                </button>
+            </div>
+        </div>
+        <button class="button-block btn-reooz" ng-click="configVm.cadastroSubmit()">Salvar</button> 
+    </ion-content>    
+</ion-view>

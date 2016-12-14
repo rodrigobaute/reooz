@@ -1,0 +1,70 @@
+<ion-view class="overlay" hide-nav-bar="false">    
+    <ion-header-bar ng-class="headerClass">
+        <div class="text-center" style="width:100%;">
+            <h1 class="text-center text-white nm np" style="width:100%">
+                <i class="ion-ios-infinite f30"></i>
+                Perfil
+            </h1>
+        </div>
+    </ion-header-bar>
+    <ion-content style="padding-bottom:60px;" class="padding">
+        
+        <div class="row-grid nm">
+            <div class="" ng-class="reoozrVm.friend || reoozrVm.self ?'col-xs-9':'col-xs-7'">
+                <h2 class="text-left pt">
+                    <img src="{{reoozrVm.reoozr.user.picture.url!=null?reoozrVm.reoozr.user.picture.url:reoozrVm.imgPerfil}}" class="img-avatar-produto" style="width:60px;height:60px;"><br /> 
+                   {{reoozrVm.reoozr.user.firstName}} {{reoozrVm.reoozr.user.lastName}}
+                   </h2>
+                    <strong>{{reoozrVm.reoozr.user.userName}}</strong><br />
+                    <strong>{{reoozrVm.reoozr.user.bioLink}}</strong>
+                    
+                
+            </div>
+            <div class="col-xs-3 text-center pt20">
+               
+                <a ui-sref="app.main.reoozrList({id:reoozrVm.reoozr.user.personId})">
+                    <strong class="f30">{{reoozrVm.reoozr.friendsQuantity}}</strong>
+                    <br />
+                    <small>Reoozers</small>
+                    </a>
+
+</div>
+            <a class="col-xs-2 text-center pt10" ng-click="reoozrVm.addFriend();" ng-show="!reoozrVm.self && !reoozrVm.friend">                
+                <span class=" nm bcircle">
+                    <i class="ion-ios-personadd-outline f30 "></i>
+                </span>
+            </a>
+            <a class="col-xs-2 text-center " ui-sref="app.main.profile" ng-show="reoozrVm.self">
+                <span class=" nm "><i class="ion-ios-compose-outline f40  pt10"></i></span>
+            </a>
+        </div>
+        <div class="prl10" ng-if="reoozrVm.reoozr.user.cidade && reoozrVm.reoozr.user.estado">{{reoozrVm.reoozr.user.cidade.text}} - {{reoozrVm.reoozr.user.estado.text}}</div>       
+        <div >
+            <div ng-if="reoozrVm.contatos" class="p10 mt10">
+            <p>
+                <strong>
+                   <a href="mailto:{{reoozrVm.reoozr.user.email}}" class="btn-reooz text-white" ng-if="reoozrVm.reoozr.user.email">{{reoozrVm.reoozr.user.email}}</a>
+                   <a href="tel:{{reoozrVm.reoozr.user.phoneNumber}}" class="btn-reooz text-white mt20" ng-if="reoozrVm.reoozr.user.phoneNumber">{{reoozrVm.reoozr.user.phoneNumber}}</a>
+                </strong>
+            </p>
+            </div>
+            <div masonry='{ "transitionDuration" : "0.6s" , "itemSelector" : ".tile"}' ng-if="!reoozrVm.contatos">
+                <!-- items -->
+                <div masonry-tile ng-repeat="item in reoozrVm.reoozr.products" class="tile p mtb10 col-l-6">
+                    <a href="#/app/main/product/{{item.productId}}">
+                        <div class="pr product">                            
+                            <img src="{{item.pictures[0].picture.url || reoozrVm.imgPadrao}}" class="img-responsive br15">
+                            <p class="title-pil np nm pl">
+                                {{item.title}}
+                            </p>
+                            <p class="text-pil np nm pl">
+                                {{item.description}}
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll icon="ion-ios-reload" on-infinite="feedVm.loadItens()" ng-if="feedVm.moreDataCanBeLoaded" distance="1%" immediate-check="false"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

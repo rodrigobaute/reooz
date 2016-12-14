@@ -1,0 +1,83 @@
+<ion-view class="overlay">
+    <ion-header-bar ng-class="headerClass">
+        <div class="text-center" style="width:100%;">
+            <h1 class="text-center text-white nm np" style="width:100%">
+                <i class="ion-ios-infinite f30"></i>
+                Amigos
+            </h1>
+        </div>
+    </ion-header-bar>
+	<div class=" tabs tabs-top tabs-virtual">
+		<a class="tab-item "
+		   ng-class="{'active': friendsVm.currentIndex=='0'}" ng-click="friendsVm.slideTO(0)">
+			AMIGOS
+		</a>
+		<a class="tab-item "
+		   ng-class="{'active': friendsVm.currentIndex=='1'}" ng-click="friendsVm.slideTO(1)">
+			SOLICITAÇÕES
+		</a>
+		<a class="tab-item "
+		   ng-class="{'active': friendsVm.currentIndex=='2'}" ng-click="friendsVm.slideTO(2)">
+			BUSCAR
+		</a>
+	</div>  
+    <ion-content class="card nm " has-tabs="true" style="padding: 45px 0px;"> 
+        <ion-refresher pulling-text="Puxe para atualizar"
+                       on-refresh="friendsVm.loadItens()"></ion-refresher>
+            <ion-slides options="friendsVm.options" slider="friendsVm.sliderF" disable-scroll="false" class="full-height">
+                <ion-slide-page>
+                    <ion-list class="list">
+                        <ion-item ng-repeat="item in friendsVm.friends" click-for-options>
+                            <img src="{{item.friendImage.url!=null?item.friendImage.url:friendsVm.imgPadrao}}" class="img-avatar">
+                            {{item.userName}}
+                            <ion-option-button class="color-buttons-pink " ng-click="friendsVm.excludeFriend(item)">
+                                <div class=" icon-text ">
+                                    <i class="ion-ios-close-outline"></i>
+                                    <small class="upper f8">Remover</small>
+                                </div>
+                            </ion-option-button>
+                        </ion-item>
+                        <h2 ng-if="friendsVm.semAmigos" class="p15">{{friendsVm.semAmigos}}</h2>
+                    </ion-list>
+                </ion-slide-page>
+                <ion-slide-page>
+                    <ion-item ng-repeat="item in friendsVm.requests" click-for-options>
+                        <img src="{{item.friendImage.url!=null?item.friendImage.url:friendsVm.imgPadrao}}" class="img-avatar">
+                        {{item.userName}}
+                        <ion-option-button class="color-buttons-green " ng-click="friendsVm.acceptFriend(item)">
+                            <div class="icon-text">
+                                <i class="ion-ios-personadd-outline"></i>
+                                <small class="upper f8">Aceitar</small>
+                            </div>
+                        </ion-option-button>
+                        <ion-option-button class="color-buttons-pink" ng-click="friendsVm.refuseFriend(item)">
+                            <div class="icon-text">
+                                <i class="ion-ios-close-outline"></i>
+                                <small class="upper f8">Remover</small>
+                            </div>
+                        </ion-option-button>
+                    </ion-item>
+                    <h2 ng-show="friendsVm.semSolicitacoes" class="p15">{{friendsVm.semSolicitacoes}}</h2>
+                </ion-slide-page>
+                <ion-slide-page style="padding-bottom:50px;">
+                    <li class="item">
+                        <label class="form-control">
+                            <input type="text" placeholder="Buscar Amigos" ng-change="friendsVm.buscarAmigo()" ng-model="friendsVm.amigoUsername">
+                        </label>
+                    </li>
+
+                    <ion-item ng-repeat="item in friendsVm.friendsSuggest" click-for-options>
+                        <img src="{{item.friendImage.url!=null?item.friendImage.url:friendsVm.imgPadrao}}" class="img-avatar">
+                        {{item.userName}}
+                        <ion-option-button class="color-buttons-green " ng-click="friendsVm.addFriend(item.personId)">
+                            <div class="icon-text">
+                                <i class="ion-ios-personadd-outline"></i>
+                                <small class="upper f8">Adicionar</small>
+                            </div>
+                        </ion-option-button>
+
+                    </ion-item>
+                </ion-slide-page>
+            </ion-slides>
+</ion-content>    
+</ion-view>

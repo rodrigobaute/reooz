@@ -1,0 +1,106 @@
+<ion-view class="overlay" hide-nav-bar="false">
+    <ion-header-bar class="produtos">
+        
+            <div class="text-center" style="width:100%;">
+                <h1 class="text-center text-white nm np" style="width:100%">
+                    <i class="ion-ios-infinite f30"></i>
+                    Detalhes
+                </h1>
+            </div>
+           
+        <button class="button button-icon button-clear  pull-right" ng-click="proposalVm.closeModal()">
+            <span class="ion-close-circled close text-white"></span>
+        </button> 
+    </ion-header-bar>
+    <ion-content>
+        <ion-scroll direction="y">
+            <h1 class="p10">{{proposalVm.statusText}}</h1>
+            <div class="text-left ptb10 prl10">
+                <img src="{{proposalVm.owner.picture.url!=null?proposalVm.owner.picture.url:proposalVm.imgPerfil}}" class="img-avatar-produto"> Itens de <strong>{{proposalVm.owner.userName}}</strong>
+            </div>
+            <ion-scroll direction="x">
+                <div class="row">
+                    <div ng-repeat="item in proposalVm.owner.products" class="col col-40">
+                        <div class="center-cropped np nm br10" style="background-image: url('{{item.picture.url || proposalVm.imgPadrao}}');" ng-if="item.productId!=null">
+                            <div class="icon-circle-bg">
+                                <span></span>
+                                <img src="img/icons/close.png" class="img-responsive" style="opacity:0;">
+                                <i class="on-hover ion-checkmark"></i>
+                            </div>
+                        </div>
+                        <div class="center-cropped np nm  br10 item-selected" style="background-color: #7eafbd;position:relative; " ng-if="item.productId==null">
+                            <div class="icon-circle-bg">
+                                <span><p>${{item.cash}}</p></span>
+                                <img src="img/icons/close.png" class="img-responsive" style="opacity:0;">
+                                
+
+                            </div>
+                        </div> 
+                        {{item.title}}
+                    </div>
+
+                </div>
+            </ion-scroll>
+
+           
+            
+            <div class="text-center bg-negotiation">
+                <img src="img/reooz-white.png" style="width:15%;height:auto;" />
+            </div>
+
+            <div class="text-left ptb10 prl10">
+                <img src="{{proposalVm.proposer.picture.url!=null?proposalVm.proposer.picture.url:proposalVm.imgPerfil}}" class="img-avatar-produto">  Itens de <strong>{{proposalVm.proposer.userName}}</strong>
+            </div>
+            <ion-scroll direction="x">
+                <div class="row">
+                    <div ng-repeat="item in proposalVm.proposer.products | orderBy: 'productId'" class="col col-40">
+                        <div class="center-cropped np nm br10" style="background-image: url('{{item.picture.url || proposalVm.imgPadrao}}');" ng-if="item.productId!=null">
+                            <div class="icon-circle-bg">
+                                <span></span>
+                                <img src="img/icons/close.png" class="img-responsive" style="opacity:0;">
+                                <i class="on-hover ion-checkmark"></i>
+                            </div>
+                        </div>
+                        <div class="center-cropped np nm  br10 item-selected" style="background-color: #7eafbd;position:relative; " ng-if="item.productId==null">
+                            <div class="icon-circle-bg">
+                                <span><p>${{item.cash}}</p></span>
+                                <img src="img/icons/close.png" class="img-responsive" style="opacity:0;">
+                            </div>
+                        </div> 
+                        {{item.title}}
+                    </div>                    
+                </div>
+            </ion-scroll>
+            <div style="padding-bottom:40px"></div>
+           
+           
+                </ion-scroll>
+        
+    </ion-content>
+    <div class="footer-bar" style="position:fixed;bottom:0px;width:100%;border:none;box-shadow:none;">
+        <div ng-show="proposalVm.showButtons">
+            <div class="col-xs-4 np">
+                <button class="button-full  color-buttons-green text-white nm ptb20 upper" ng-click="proposalVm.acceptOffer()">
+                    Aceitar
+                </button>
+            </div>
+            <div class="col-xs-4 np">
+                <button class="button-full color-buttons-pink text-white nm ptb20 upper" ng-click="proposalVm.refuseOffer()">
+                    Recusar
+                </button>
+            </div>
+            <div class="col-xs-4 np">
+                <button class="button-full color-buttons-blue text-white nm ptb20 upper" ng-click="proposalVm.newProposal()">
+                    renegociar
+                </button>
+            </div>
+        </div>
+        <div ng-if="proposalVm.offer.status==2">
+            <div class="col-xs-12 np">
+                <button class="button-full color-buttons-green text-white nm ptb20 upper" ng-click="proposalVm.showContact()">
+                    Entre em contato
+                </button>
+            </div>
+        </div>
+        <div style="padding-bottom:30px"></div>
+</ion-view>

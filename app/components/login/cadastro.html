@@ -1,0 +1,106 @@
+﻿<div class="modal image-modal overlay text-center" >
+    <ion-header-bar class="">             
+        <button class=" button button-icon button-clear  pull-right"  ng-click="LoginVm.closeModal()">
+            <span class="ion-close-circled close color-titles-gray" ></span>
+        </button>        
+    </ion-header-bar >
+    <ion-content class="padding" style="padding-bottom:60px;margin-bottom:{{ LoginVm.keyboardX}}px;">
+     <div class="container-grid">
+      <h1 class="ptb10">Cadastre-se</h1>
+        <button class="button-block btn-face prl20 mb10" ng-click="LoginVm.loginFacebook()" ng-hide="LoginVm.byFace"><i class="ion-social-facebook f30 mr10"></i> Cadastre-se com Facebook</button>
+        <form name="form_cadastro" id="form_cadastro">
+            <label class="form-control pb10">
+                <input type="text" placeholder="Nome" ng-model="LoginVm.cadastro.firstName" validator="required, minlength=3" valid-method="blur" name="nome">
+            </label> 
+             <label class="form-control pb10">
+                <input type="text" placeholder="Sobrenome" ng-model="LoginVm.cadastro.lastName" validator="required,minlength=3" valid-method="blur" name="sobrenome">
+            </label>            
+            <label class="form-control pb10">
+                <input type="text" placeholder="Nome de usuário" ng-model="LoginVm.cadastro.userName"  name="username" ng-change="LoginVm.validateUser();" validate-alpha-numeric>
+            </label>
+            <div class="row-grid">
+              <div class="col-xs-6  pr">
+                <label class="form-control pb10">
+                    <input type="text" placeholder="E-mail" ng-model="LoginVm.cadastro.email" validator="required, email" valid-method="blur" name="email">
+                </label> 
+              </div>
+               <div class="col-xs-6">
+                <label class="form-control pb10">
+                    <input type="text" placeholder="(DDD) + Numero" ng-model="LoginVm.cadastro.phoneNumber" validator="required" valid-method="blur" name="celular" ui-br-phone-number>
+                </label>
+              </div> 
+            </div>       
+            
+        <label class="form-control pb10">
+            
+            <ion-select-autocomplete multiselect="false"
+                                     output="LoginVm.cadastro.StateId"
+                                     header="Estado"
+                                     label-key="text" value-key="id"
+                                     options="LoginVm.estados" selected="LoginVm.updateCidades(LoginVm.cadastro.StateId)" ctrl="LoginController">
+            </ion-select-autocomplete>
+                <!--<select ng-model="LoginVm.cadastro.StateId" ng-options="estado.id as estado.text  for estado in LoginVm.estados" validator="required" ng-change="LoginVm.updateCidades(LoginVm.cadastro.StateId);">
+          <option value="">Estado</option>
+        </select>-->
+            </label>
+        <label class="form-control pb10">
+            <ion-select-autocomplete multiselect="false"
+                                     output="LoginVm.cadastro.CityId"
+                                     header="Cidade"
+                                     label-key="text" value-key="id"
+                                     options="LoginVm.cidades" ctrl="LoginController" ng-show="LoginVm.cidades">
+            </ion-select-autocomplete>
+           <!--<select ng-model="LoginVm.cadastro.CityId" ng-options="cidade.id as cidade.text for cidade in LoginVm.cidades" validator="required" ng-disabled="!LoginVm.cidades">
+            <option value="">Cidade</option>
+          </select>-->       
+        </label> 
+        <label class="form-control pb10">
+            <input type="password" placeholder="Digite uma senha" ng-model="LoginVm.cadastro.password" validator="required, minlength=6" name="senha">
+        </label> 
+        <label class="form-control pb10" ng-show="form_cadastro.senha.$valid">
+            <input type="password" placeholder="Digite novamente a senha" ng-model="LoginVm.cadastro.passwordConfirm" validator="required, minlength=6" valid-method="blur">
+        </label>   
+        <h2>Preferencias</h2>
+        <div class="row-grid" ng-repeat="input in LoginVm.cadastro.preferences">
+            <div class="  pr" ng-class="LoginVm.subList[$index].length >0?'col-xs-5':'col-xs-10'">
+                <label class="form-control pb10">
+                    <ion-select-autocomplete multiselect="false"
+                                             output="input.categoryId"
+                                             header="Categoria"
+                                             label-key="text" value-key="id"
+                                             options="LoginVm.categorias" ctrl="LoginController" selected="LoginVm.updateSub(input.categoryId,$index)">
+                    </ion-select-autocomplete>
+                    <!--<select ng-model="input.categoryId" ng-options="cat.id as cat.text  for cat in LoginVm.categorias"  ng-change="LoginVm.updateSub(input.categoryId,$index);">
+                        <option value="">Categoria</option>
+                    </select>-->
+                </label>
+            </div>
+            <div class="col-xs-5" ng-show="LoginVm.subList[$index].length >0">
+                <label class="form-control pb10">
+                    <ion-select-autocomplete multiselect="false"
+                                             output="input.subCategoryId"
+                                             header="Sub Categoria"
+                                             label-key="text" value-key="id"
+                                             options="LoginVm.subList[$index]" ctrl="LoginController" >
+                    </ion-select-autocomplete>
+                    <!--<select ng-model="input.subCategoryId" ng-options="sub.id as sub.text for sub in LoginVm.subList[$index]">
+                        <option value="">Sub Categoria</option>
+                    </select>-->
+                </label>
+            </div>
+            <div class="col-xs-2">
+                <button class="button button-small button-balanced" ng-if="$index == LoginVm.cadastro.preferences.length - 1" ng-click="LoginVm.addInput()">
+                    <i class="icon ion-plus"></i>
+                </button>
+                <button class="button button-small button-assertive" ng-if="$index != LoginVm.cadastro.preferences.length - 1" ng-click="LoginVm.removeInput($index)">
+                    <i class="icon ion-minus"></i>
+                </button>
+            </div>             
+        </div>
+               
+
+        <button class="button-block btn-reooz" ng-click="LoginVm.cadastroSubmit(form_cadastro)" >Enviar</button> 
+        </form>
+        </div>
+    </ion-content>
+</div>

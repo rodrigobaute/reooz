@@ -1,0 +1,31 @@
+﻿<ion-view class="overlay" hide-nav-bar="false">
+    <ion-header-bar ng-class="headerClass">
+        <div class="text-center" style="width:100%;">
+            <h1 class="text-center text-white nm np" style="width:100%">
+                <i class="ion-ios-infinite f30"></i>
+                Proposta
+            </h1>
+        </div>
+    </ion-header-bar>
+    <ion-content >
+        <ion-list class="list" style="padding-bottom:60px;">
+            <ion-item ng-repeat="item in proposalVm.negotiations" click-for-options class="item-text-wrap">
+                <img src="{{item.proposerPerson.picture.url || proposalVm.imgPadrao}}" class="img-avatar" style="display:inline-block;">
+                <div style="display:inline-block;width:85%;">
+                    {{ proposalVm.statusDescription[item.status - 1]}}
+                    <span ng-if="item.status==1"> de <strong>{{item.proposerPerson.userName}}</strong></span>
+                    <span ng-if="item.status==2 || item.status==3 || item.status==6"> por <strong>{{item.proposerPerson.userName}}</strong></span>
+                    <span ng-if="item.status==5"> <strong>{{item.proposerPerson.userName}}</strong></span>
+                </div>
+                <ion-option-button class="color-buttons-green " ng-click="proposalVm.proposalDetails(item)">
+                    <div class="icon-text">
+                        <i class="ion-ios-eye-outline"></i>
+                        <small class="upper f8">Visualizar</small>
+                    </div>
+                </ion-option-button>
+            </ion-item>
+            
+        </ion-list>   
+        
+    </ion-content>            
+</ion-view>

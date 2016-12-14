@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="DirectoryEntry.js" server="ftp.smarterasp.net" local="131260471492805077" remote="131260899000000000" Dst="2" />
+<file name="DirectoryReader.js" server="ftp.smarterasp.net" local="131260471492825074" remote="131260899000000000" Dst="2" />
+<file name="Entry.js" server="ftp.smarterasp.net" local="131260471492875068" remote="131260899000000000" Dst="2" />
+<file name="File.js" server="ftp.smarterasp.net" local="131260471492900062" remote="131260899000000000" Dst="2" />
+<file name="FileEntry.js" server="ftp.smarterasp.net" local="131260471492920087" remote="131260899000000000" Dst="2" />
+<file name="FileError.js" server="ftp.smarterasp.net" local="131260471493035062" remote="131260899000000000" Dst="2" />
+<file name="FileReader.js" server="ftp.smarterasp.net" local="131260471493125064" remote="131260899000000000" Dst="2" />
+<file name="FileSystem.js" server="ftp.smarterasp.net" local="131260471493145068" remote="131260899000000000" Dst="2" />
+<file name="fileSystemPaths.js" server="ftp.smarterasp.net" local="131260471493165064" remote="131260899000000000" Dst="2" />
+<file name="fileSystems.js" server="ftp.smarterasp.net" local="131260471493230080" remote="131260899000000000" Dst="2" />
+<file name="FileUploadOptions.js" server="ftp.smarterasp.net" local="131260471493250069" remote="131260899000000000" Dst="2" />
+<file name="FileUploadResult.js" server="ftp.smarterasp.net" local="131260471493270080" remote="131260899000000000" Dst="2" />
+<file name="FileWriter.js" server="ftp.smarterasp.net" local="131260471493365065" remote="131260899000000000" Dst="2" />
+<file name="Flags.js" server="ftp.smarterasp.net" local="131260471493385079" remote="131260899000000000" Dst="2" />
+<file name="LocalFileSystem.js" server="ftp.smarterasp.net" local="131260471493405080" remote="131260899000000000" Dst="2" />
+<file name="Metadata.js" server="ftp.smarterasp.net" local="131260471493430077" remote="131260899000000000" Dst="2" />
+<file name="ProgressEvent.js" server="ftp.smarterasp.net" local="131260471493450066" remote="131260899000000000" Dst="2" />
+<file name="requestFileSystem.js" server="ftp.smarterasp.net" local="131260471493470070" remote="131260899000000000" Dst="2" />
+<file name="resolveLocalFileSystemURI.js" server="ftp.smarterasp.net" local="131260471493495078" remote="131260899000000000" Dst="2" />
+</dwsync>

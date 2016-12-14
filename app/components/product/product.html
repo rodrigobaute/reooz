@@ -1,0 +1,105 @@
+<ion-view class="overlay" hide-nav-bar="false">
+    <ion-header-bar ng-class="headerClass">
+        <div class="text-center" style="width:100%;">
+            <h1 class="text-center text-white nm np" style="width:100%">
+                <i class="ion-ios-infinite f30"></i>
+                Produto
+            </h1>
+        </div>
+    </ion-header-bar>
+    
+
+        <ion-content class="text-center content-padding" ng-class="{'applyFooter':productVm.showComent}">  
+        	<div class=" container-grid">          
+            <h2 class="text-left ptb10 prl20">
+                <a ui-sref="app.main.reoozrProfile({id:productVm.currentItem.personId})"><img src="{{productVm.currentItem.profilePicture.url || productVm.imgPerfil}}" class="img-avatar"> {{productVm.currentItem.userName}}</a>
+                <!--<a class=" nm bcircle" ng-click="productVm.addFriend();" style="float:right;" ng-if="!productVm.self">
+                    <i class="ion-ios-personadd-outline f30 "></i>
+                </a>-->
+                
+            </h2>
+            
+            <h1 class="text-left prl20" >
+                {{productVm.currentItem.title}}
+                <br />
+                {{productVm.currentItem.estimatedPrice | currency: 'R$'}}
+            </h1>
+            <ion-slides options="productVm.options" slider="productVm.sliderA" disable-scroll="true">
+                <ion-slide-page ng-repeat="item in productVm.currentItem.pictures">
+                    <img src="{{item.picture.url||productVm.imgpadrao}}" class="img-responsive-full">
+                </ion-slide-page>
+            </ion-slides>
+            <div class="text-left prl20 pb10">
+                <span class="br10" ng-if="productVm.currentItem.isForSell">VENDE</span>
+                <span ng-if="productVm.currentItem.isForSell && productVm.currentItem.isForSellExchange"> / </span>
+                <span class="br10" ng-if="productVm.currentItem.isForSellExchange">TROCA</span>
+                <span ng-if="productVm.currentItem.isForRent && productVm.currentItem.isForSellExchange"> / </span>
+                <span class="br10" ng-if="productVm.currentItem.isForRent">ALUGA</span>
+            </div>
+            <div class="row-grid prl20 ptb10" ng-show="productVm.currentItem">
+                <div class="col-xs-2 p">
+                    <img src="img/icons/coments.png" class="img-responsive icon-png" ng-click="productVm.showComent=!productVm.showComent" />
+                </div>
+                <div class="col-xs-2 p" ng-if="!productVm.self">
+                    <img src="img/icons/fav.png" class="img-responsive icon-png" ng-click="productVm.favorito()" ng-if="!productVm.itemFav"/>
+                    <img src="img/icons/fav_full.png" class="img-responsive icon-png active" ng-click="productVm.favorito()"  ng-if="productVm.itemFav"/>
+                </div>
+                <div class="col-xs-4" ng-if="!productVm.self">
+                    <a class="btn-reooz-color button-block text-white ptb10 mt10" ui-sref="app.main.negotiation({ownerProducts: productVm.currentItem.productId, ownerId: productVm.currentItem.personId, proposerProducts:false,proposerId:productVm.personId,status:1})">
+                        Negociar
+                    </a>
+                </div>
+                <div class="col-xs-8 p" ng-if="productVm.self" ng-click="productVm.editProduct();">
+                    <button class="btn-reooz-color button-block text-white ptb10">
+                        Editar
+                    </button>
+                </div>
+                <div class="col-xs-2 p">
+                    <img src="img/icons/share.png" class="img-responsive icon-png" ng-click="productVm.share()" />
+                </div>
+                <div class="col-xs-2 p" ng-if="!productVm.self" ng-click="productVm.denunciar()">
+                    <img src="img/icons/denuncia.png" class="img-responsive icon-png" />
+                </div>
+            </div>
+            <!--<div class="prl20 ptb">
+                <p class="color-title-gray text-left"><strong> Valor Estimado:</strong> {{productVm.currentItem.estimatedPrice | currency: 'R$'}}</p>
+            </div>-->
+            <div class="prl20 ptb">
+                <p class="color-title-gray text-left">{{productVm.currentItem.description}}</p>
+                <hr />
+            </div>
+            
+            <div class="prl20 ptb comentarios">               
+                <div class="color-title-gray text-left p row-grid nm" ng-repeat="item in productVm.comentariosList" ng-class="{'selfComment':item.author==productVm.currentItem.personId}" on-hold="productVm.showComent = !productVm.showComent">
+                    <div class="col-xs-2">
+                        <img ng-src="{{item.authorPicture || 'img/icons/icone-meuperfil.png'}}" class="img-responsive">
+                    </div>
+                    <div class="col-xs-10" ng-bind-html="item.message | mention : '_blank':productVm.reoozrs">
+                       
+                    </div>
+                </div>
+            </div>
+            <div style="padding-bottom:60px"></div>
+</div>
+        </ion-content>
+        <div class="float-bottom" style="background-color:#fff;bottom:{{productVm.keyboardX}}px;" ng-show="productVm.showComent" >
+            <div class="list" class="box-one">
+                <div class="item item-input-inset">
+                    <label class="item-input-wrapper">
+                        <input type="text" mentio
+                               mentio-typed-text="typedTerm"
+                               mentio-items="productVm.reoozrs | filter:label:typedTerm"
+                               ng-model="productVm.msg"                               
+                               id="mentioInput"
+                               mentio-select="productVm.setFocus(item)"
+                               is-focused
+                               placeholder="Escreva aqui seu comentário" style="padding:10px 5px;"/>
+                        <!--<input type="text" placeholder="Escreva aqui seu comentário" ng-model="productVm.msg" style="padding:10px 5px;">-->
+                    </label>
+                    <button class="button-small btn-reooz-color br prl10" ng-click="productVm.comentario();">
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>        
+</ion-view>

@@ -1,0 +1,30 @@
+/*.ng-invalid.ng-dirty { 
+  border-bottom: solid 2px #f00;
+}
+.ng-valid.ng-dirty { 
+  border-bottom: solid 2px #bdc254;
+}*/
+.form-control{
+  display: inline-block;
+  width: 100%;
+}
+input{
+  background-color:#f1f2f2;
+  color:#000000;
+  border:#e6e7e8 solid 1px;
+  border-radius:4px;
+  font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  padding: 15px 10px;
+  }
+.form-control input,.form-control select{
+    background-color: #f1f2f2;
+    color: #939598;
+    border: #e6e7e8 solid 1px;
+    border-radius: 4px;
+    font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+    padding: 15px 10px;
+    width: 100%;
+  }
+  .form-control select{
+    padding: 10px 5px    
+  }

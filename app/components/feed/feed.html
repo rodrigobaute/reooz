@@ -1,0 +1,68 @@
+<ion-view class="overlay" hide-nav-bar="false">
+    <ion-header-bar  ng-class="headerClass">
+        <div class="text-center" style="width:100%;" >            
+            <img src="img/logo-verde.png" class="img-responsive pt" width="100px;" />           
+            
+        </div>
+    </ion-header-bar>
+    <div class="tabs tabs-top tabs-virtual header-busca">
+        <label class="item-input-wrapper">
+            <input type="text" placeholder="Busca" ng-model="feedVm.titleSeach" class=" ptb prl10" ng-focus="feedVm.showSearch=true" ng-blur="feedVm.showSearch=false">
+        </label>
+        <a class="tab-item " ng-click="feedVm.busca()"   ng-show="feedVm.showSearch">
+            <i class="ion-ios-search f30"></i>
+        </a>
+        <a class="tab-item bl"  ng-click="feedVm.hideSearch()"   ng-show="feedVm.showSearch">
+            <i class="ion-ios-close-empty f30"></i>
+        </a>
+    </div>  
+    <ion-content on-swipe-down="feedVm.onDragDown()" style="margin-top:45px;">
+        <ion-refresher pulling-text="Puxe para atualizar"
+                       on-refresh="feedVm.loadItens()">
+        </ion-refresher>
+        
+        <div class="padding" style="padding-bottom:60px;">
+        
+            <div masonry='{ "transitionDuration" : "0.6s" , "itemSelector" : ".tile"}'>
+                <!-- items -->
+                <div masonry-tile ng-repeat="item in feedVm.itens" class="tile p mtb10 man-col" style="visibility:hidden;" ng-if="item.personId!=feedVm.personId">
+                    
+                    <div class="pr product">
+                        <p class="text-left pl">
+                            <a ui-sref="app.main.reoozrProfile({id:item.personId})">
+                                <img ng-src="{{item.profilePicture.url||feedVm.imgPerfil}}" class="img-avatar-produto">
+                                <strong>{{item.userName}}</strong>
+                            </a>
+                        </p>
+                        <a href="#/app/main/product/{{item.productId}}" ng-if="!item.advertisement">
+                            <img ng-src="{{item.pictures[0].picture.url || feedVm.imgPadrao}}" class="img-responsive-full br15" >
+                            <p class="title-pil np nm pl">
+                                {{item.title}}
+                            </p>
+                            <p class="text-pil np nm pl">
+                                {{item.estimatedPrice | currency:'R$'}}
+                            </p>
+                        </a>
+                    </div>
+                  
+                    <div  ng-if="item.advertisement" ng-click="feedVm.external('{{item.advertisement.link}}')">
+                        <div class="pr product">
+                            <div class="text-left pl sublinks" style="font-size:8px;">                                
+                                Patrocinado
+                            </div>
+                            <img ng-src="{{item.advertisement.images[0].url || feedVm.imgPadrao}}" class="img-responsive-full br15">
+
+                            <p class="title-pil np nm pl">
+                                {{item.advertisement.title}}
+                            </p>
+                            <p class="text-pil np nm pl">
+                                {{item.advertisement.description}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll icon="ion-ios-reload" on-infinite="feedVm.loadItens()" ng-if="feedVm.moreDataCanBeLoaded" distance="1%" immediate-check="false"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,22 @@
+        
+        <ion-tabs class="tabs-icon-top menu-tab"  ng-controller="MenuCtrl as ctrl">
+            <ion-tab  icon="all-black" ng-click="ctrl.navGo('app.main.feed',0)">
+                
+            </ion-tab>
+
+            <ion-tab icon="friends-black" ng-click="ctrl.navGo('app.main.feedFriends',1)">
+                
+            </ion-tab>
+
+            <ion-tab icon="home-black" ng-click="ctrl.navGo('app.main.self',2)">>
+
+            </ion-tab>
+            <ion-tab icon="activity-black" ng-click="ctrl.navGo('app.main.activity',3)" badge="badgeCount" badge-style="badge-assertive" >
+
+            </ion-tab>
+            <ion-tab  icon="options-black" ng-click="ctrl.menuOpen()">
+
+            </ion-tab>
+        </ion-tabs>
+        <ion-nav-view name="feed"></ion-nav-view>
+      
